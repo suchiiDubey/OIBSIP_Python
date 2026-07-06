@@ -1,0 +1,45 @@
+import pyttsx3
+
+# Initialize speech engine
+engine = pyttsx3.init()
+
+def speak(text):
+    print("Assistant:", text)
+    engine.say(text)
+    engine.runAndWait()
+
+def process_command(command):
+    command = command.lower()
+
+    if "hello" in command or "hi" in command:
+        speak("Hello! How can I help you?")
+
+    elif "how are you" in command:
+        speak("I am fine. Thank you.")
+
+    elif "your name" in command:
+        speak("I am a simple voice assistant.")
+
+    elif "search" in command:
+        query = command.replace("search", "").strip()
+        if query:
+            speak("You asked me to search for " + query)
+        else:
+            speak("Please tell me what you want to search.")
+
+    elif "bye" in command or "exit" in command:
+        speak("Goodbye!")
+        return False
+
+    else:
+        speak("Sorry, I don't understand that command.")
+
+    return True
+
+# Main program
+speak("Voice Assistant Started")
+
+running = True
+while running:
+    command = input("You: ")
+    running = process_command(command) 
